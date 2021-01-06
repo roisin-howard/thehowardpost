@@ -26,6 +26,8 @@ gem 'react_on_rails', '12.0.0'
 
 gem 'devise'
 
+#gem 'bootstrap-sass'
+gem 'bootstrap', '~>4.1.1'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

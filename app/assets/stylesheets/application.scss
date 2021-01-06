@@ -14,3 +14,31 @@
  *= require_self
  */
 @import "bootstrap";
+
+.header {
+  padding: 50px;
+  margin: 20px;
+  background-color: lightgrey;
+  color: darkgrey;
+  border-radius: 15px 50px;
+  background-image: linear-gradient(to right, black, darkgrey);
+}
+.login-box {
+  background-color: lightblue;
+  font-size: 1.2em;
+  color: grey;
+  padding: 50px;
+  margin: 20px;
+  border-radius: 15px 50px;
+}
+
+.registration-box{
+  font-size: 1.2em;
+  padding: 50px;
+  margin: 20px;
+}
+
+.devise-links a {
+  color: white; 
+  font-size: 1.2em;
+}
