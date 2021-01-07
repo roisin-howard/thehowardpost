@@ -16,26 +16,48 @@
 @import "bootstrap";
 
 .header {
-  padding: 50px;
+  padding: 20px;
   margin: 20px;
   background-color: lightgrey;
   color: darkgrey;
   border-radius: 15px 50px;
   background-image: linear-gradient(to right, black, darkgrey);
 }
-.login-box {
-  background-color: lightblue;
-  font-size: 1.2em;
-  color: grey;
+
+.body {
+  padding: 20px;
+  border-radius: 0px 50px;
+  background-image: linear-gradient(to right, black, darkgrey);
+}
+
+.footer {
   padding: 50px;
-  margin: 20px;
+  color: darkgrey;
+}
+
+.text-left{
+  color: darkgrey;
+}
+
+.text-right{
+  color: black;
+}
+
+.login-box {
+  background-color: rgb(21, 88, 90);
+  font-size: 1.2em;
+  color: darkgrey;
+  padding: 50px;
   border-radius: 15px 50px;
 }
 
 .registration-box{
+  background-color: rgb(21, 88, 90);
   font-size: 1.2em;
+  color: darkgrey;
   padding: 50px;
-  margin: 20px;
+  border-radius: 15px 50px;
+  align-content: left;
 }
 
 .devise-links a {
