@@ -3,9 +3,8 @@
     <div class="col-lg-4 registration-box">
 
       <div>
-        <span>
-          <h2>Register for an account</h2>
-        </span>
+        <h2>Register for an account</h2>
+        <hr/>
       </div>
 
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: 'form-horizontal') do |f| %>
@@ -15,17 +14,17 @@
           <%= f.label :first_name %> <br/>
           <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name" %>
         </div>
-
+        <br/>
         <div class="form_group clearfix">
           <%= f.label :last_name %> <br/>
           <%= f.text_field :last_name, autocomplete: "last_name" %>
         </div>
-
+        <br/>
         <div class="form_group clearfix">
           <%= f.label :email %><br />
           <%= f.email_field :email, autocomplete: "email" %>
         </div>
-
+        <br/>
         <div class="form_group clearfix">
           <%= f.label :password %>
           <% if @minimum_password_length %>
@@ -33,17 +32,17 @@
           <% end %><br />
           <%= f.password_field :password, autocomplete: "new-password" %>
         </div>
-
+        <br/>
         <div class="form_group clearfix">
           <%= f.label :password_confirmation %><br />
           <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
         </div>
-
+        <br/>
         <div class="actions">
           <%= f.submit "Sign up" %>
         </div>
       <% end %>
-
+      <hr/>
       <%= render "users/shared/links" %>
     </div>
   </div>

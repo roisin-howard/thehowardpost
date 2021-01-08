@@ -24,6 +24,10 @@
   background-image: linear-gradient(to right, black, darkgrey);
 }
 
+.header-title {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 .body {
   padding: 20px;
   border-radius: 0px 50px;
@@ -60,7 +64,3 @@
   align-content: left;
 }
 
-.devise-links a {
-  color: white; 
-  font-size: 1.2em;
-}

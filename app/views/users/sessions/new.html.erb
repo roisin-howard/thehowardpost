@@ -1,7 +1,9 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-8 container-fluid text-left">
-        <br/><br/><br/>
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-6 text-left">
+        <br/><br/><br/><br/><br/><br/>
         <h3>Looking for the <br/><strong>latest</strong> and <strong>greatest</strong> <br/>blogging engine <br/>Team TPOZ <br/>has to offer<br/> Register Today!</h3>
         <p>Visit <strong><%= link_to "Sign up", new_registration_path(resource_name) %></strong></p> 
     </div>
@@ -9,7 +11,7 @@
     <div class="col-lg-4 login-box container-fluid">
       <div>
         <h1>Sign In</h1>
-        <span>Access your account.</span>
+        <span>Access your account</span>
         <hr/>
       </div>
       
@@ -18,7 +20,7 @@
           <%= f.label :email %><br />
           <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'e.g. jonh@doe.com' %>
         </div>
-        
+        <br/>
         <div class="form-group clearfix">
           <%= f.label :password %><br />
           <%= f.password_field :password, autocomplete: "current-password" %>
@@ -34,10 +36,8 @@
         <div class="actions">
           <%= f.submit "Log in", class: 'btn btn-primary'  %>
         </div>
-
-        <div class="devise-links">
-          <%= render "users/shared/links" %>
-        </div>
+        <hr/>
+        <%= render "users/shared/links" %>
       <% end %>
     </div>
   </div>
