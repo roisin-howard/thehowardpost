@@ -9,6 +9,13 @@ class User < ApplicationRecord
 
   validate :password_complexity
 
+  has_one :profile, dependent: :destroy
+  after_create :init_profile
+
+  def init_profile
+    self.create_profile!
+  end
+
   def password_complexity
     # Regexp extracted from https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
     return if password.blank? || password =~ /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/

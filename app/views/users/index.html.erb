@@ -1,5 +1,32 @@
-<ul>
-  <% @users.each do |user| %>
-    <li><%= user.name %></li>
-  <% end %>
-</ul>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 registration-box">
+            <% if user_signed_in? %>
+            <div>
+                <h2>User Profile</h2>
+                <hr/>
+            </div>
+
+            <div class="card text-card">
+                <div class="card-header">
+                    <%= current_user.first_name %> <%= current_user.last_name %>
+                </div>
+                <div class="card-body">
+                <p class="card-text">
+                <strong>First Name:</strong> <%= current_user.first_name %> 
+                <br/>
+                <strong>Last Name:</strong> <%= current_user.last_name %>
+                <br/>
+                <strong>Email Address:</strong> <%= current_user.email %>
+                </p>
+                <button type="button" class="btn btn-info btn-block"><%= link_to "Edit Profile", edit_user_registration_path %></button>
+            </div>
+
+            <% else %>
+            <h4>Please <%= link_to "login", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %> to access user profile</h4>
+            <% end %>
+        </div>
+    </div>
+</div>
+ 
+

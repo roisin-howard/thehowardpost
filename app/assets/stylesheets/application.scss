@@ -15,18 +15,6 @@
  */
 @import "bootstrap";
 
-.header {
-  padding: 20px;
-  margin: 20px;
-  background-color: lightgrey;
-  color: darkgrey;
-  border-radius: 15px 50px;
-  background-image: linear-gradient(to right, black, darkgrey);
-}
-
-.header-title {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
 
 .body {
   padding: 20px;
@@ -44,6 +32,10 @@
 }
 
 .text-right{
+  color: black;
+}
+
+.text-card{
   color: black;
 }
 

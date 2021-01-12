@@ -1,1 +1,60 @@
-<%= @user.email %>
+<div class="container-fluid">
+    <div class="row">
+    <% if user_signed_in? %>
+        <div class="col-lg-4 registration-box">
+            <div>
+                <h2>User Profile</h2>
+                <hr/>
+            </div>
+            <div class="card text-card">
+                <div class="card-header">
+                    <%= current_user.first_name %> <%= current_user.last_name %>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                    <strong>First Name:</strong> <%= current_user.first_name %> 
+                    <br/>
+                    <strong>Last Name:</strong> <%= current_user.last_name %>
+                    <br/>
+                    <strong>Email Address:</strong> <%= current_user.email %>
+                    </p>
+                    <button type="button" class="btn btn-info btn-block"><%= link_to "Edit Profile", edit_user_registration_path %></button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-sm-1">
+        </div>
+
+        <div class="col-lg-4 registration-box">
+            <div>
+                <h2>Blog Posts</h2>
+                <hr/>
+            </div>
+            <div class="card text-card">
+                <div class="card-body">
+                    <h5 class="card-title">Available Posts</h5>
+                    <p class="card-text">These are the list of current blog posts.  
+                    The blog posts index & other pages are not currenlty set up 
+                    so the buttons will not point anywhere and these posts do not exist.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Fake Post 1</li>
+                    <li class="list-group-item">Fake Post 2</li>
+                    <li class="list-group-item">Fake Post 3</li>
+                </ul>
+                <div class="card-body">
+                    <button type="button" class="btn btn-info btn-block"><%= link_to "View Blog Post Home Page", "#" %></button>
+                    <button type="button" class="btn btn-info btn-block"><%= link_to "Add New Blog Post", "#" %></button>
+                </div>
+            </div>
+        </div>
+        <% else %>
+            <div class="col-lg-4 registration-box">
+                <h4>Please <%= link_to "login", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %> to access user profile</h4>
+            </div>
+        <% end %>
+    </div>
+</div>
+
+

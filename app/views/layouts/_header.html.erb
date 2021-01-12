@@ -6,13 +6,17 @@
         <ul class="nav">
             <li class="nav-item nav-link active"><%= link_to 'Home', root_path %></li>
             <% if user_signed_in? %>
-            <li class="nav-item nav-link"><%= link_to "Users", "#" %></li>
             <li class="nav-item nav-link dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span><i class="far fa-user-circle"></i></span></a>
                 <ul class="dropdown-menu">
+                    <h6 class="dropdown-header">Profile</h6>
                     <li class="dropdown-item">
-                        <%= link_to 'Profile', edit_user_registration_path %>
+                        <%= link_to "View", users_show_path %>
                     </li>
+                    <li class="dropdown-item">
+                        <%= link_to "Edit", edit_user_registration_path %>
+                    </li>
+                    <div class="dropdown-divider"></div>
                     <li class="dropdown-item">
                         <%= link_to "Logout", destroy_user_session_path, method: :delete %>
                     </li>
