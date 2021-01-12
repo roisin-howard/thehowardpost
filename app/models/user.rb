@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   after_create :init_profile
 
-  has_many: blogs
+  has_many :blogs
 
   def init_profile
     self.create_profile!
