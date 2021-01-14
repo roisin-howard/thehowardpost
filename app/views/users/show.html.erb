@@ -49,7 +49,7 @@
                                 </div>
                                 <div id="collapse<%=i%>" class="collapse" aria-labelledby="heading<%=i%>" data-parent="#accordion">
                                     <div class="card-body">
-                                        <%= blog.body %>
+                                        <%= truncate(blog.body, :length => 300) %>
                                         <br/>
                                         <p class="float-right">
                                             <%= link_to "View", blog_path(blog) %>

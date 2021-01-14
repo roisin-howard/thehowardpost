@@ -10,7 +10,7 @@
                     <div class="jumbotron">
                         <h1 class="display-12 jumbotron-title"><%= blog.title %></h1>
                         <p class="lead">
-                            <%= blog.body %>
+                            <%= truncate(blog.body, :length => 300) %>
                         </p>
                         <br/> <br/>
                         <p class="lead float-right">

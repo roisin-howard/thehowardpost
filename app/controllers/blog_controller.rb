@@ -3,9 +3,9 @@ class BlogController < ApplicationController
     @search_flag = false
     if params[:search]
       @search_flag = true
-      @blogs = Blog.search(params[:search]).order("created_at ASC")
+      @blogs = Blog.search(params[:search]).order("created_at DESC")
     else
-      @blogs = Blog.all.order('created_at ASC')
+      @blogs = Blog.all.order('created_at DESC')
     end
   end
 

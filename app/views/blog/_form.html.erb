@@ -1,13 +1,13 @@
 <%= form_with model: blog do |form| %>
   <div>
     <%= form.label :title %><br>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, :size=>"100" %>
     
   </div>
 
   <div>
     <%= form.label :body %><br>
-    <%= form.text_area :body %><br>
+    <%= form.text_area :body, :size=>"100x10" %><br>
     
   </div>
 
