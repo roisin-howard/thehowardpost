@@ -13,10 +13,21 @@
                     <strong>Body:</strong> <%= @blog.body %>
                     </p>
                 <hr class="my-4">
-                <p><%= link_to "Edit", edit_blog_path(@blog) %></p>
+                <% if user_signed_in? %>
+                    <p class="float-right"><%= link_to "Edit", edit_blog_path(@blog) %></p>
+                <% else %>
+                    <p class="float-right">Please <%= link_to "Login", new_user_session_path %> or 
+                    <%= link_to "Register", new_user_registration_path %> to modify or delete a blog post.</p>
+                <% end %>
             </div>
             <button type="button" class="btn btn-info btn-block"><%= link_to "View Index of Blog Posts", blog_index_path %></button>
-            <button type="button" class="btn btn-info btn-block"><%= link_to "Add New Blog Post", new_blog_path %></button>
+            <% if user_signed_in? %>
+                <button type="button" class="btn btn-info btn-block"><%= link_to "Add New Blog Post", new_blog_path %></button>
+            <% else %>
+                <br/>
+                <p class="float-right">Please <%= link_to "Login", new_user_session_path %> or 
+                <%= link_to "Register", new_user_registration_path %> to create a new blog post.</p>
+            <% end %>
         </div>
     </div>
 </div>

@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   root :to => "home#index"
   get '/users/show', to: 'users#show'
   get '/users/index', to: 'users#index'
+  post '/blog/new', to: 'blog#create'
 end

@@ -1,6 +1,12 @@
 class BlogController < ApplicationController
   def index
-    @blogs = Blog.all.order("created_at DESC");
+    @search_flag = false
+    if params[:search]
+      @search_flag = true
+      @blogs = Blog.search(params[:search]).order("created_at ASC")
+    else
+      @blogs = Blog.all.order('created_at ASC')
+    end
     @blogs.each do |blog| 
       @user = User.find_by_id(blog.users_id)
       @user_name = @user.first_name + " " +  @user.last_name
@@ -14,20 +20,15 @@ class BlogController < ApplicationController
   end
 
   def new
-    puts "New"
     @blog = Blog.new
-    puts "Hello"
   end
 
   def create
-    puts "hello"
     if user_signed_in?
-      puts "logged in"
       @blog = Blog.new(blog_params)
-      puts @blog
       @blog.users_id = current_user.id
       if @blog.save
-          redirect_to blog_path(@blogs)
+          redirect_to @blog
       else 
       render json: {  
           status: 500,
@@ -48,7 +49,6 @@ class BlogController < ApplicationController
 
   def update
     @blog = Blog.find(params[:id])
-
     if @blog.update(blog_params)
       redirect_to @blog
     else
@@ -58,7 +58,7 @@ class BlogController < ApplicationController
 
   private
     def blog_params
-      params.require(:blog).permit(:title, :body)
+      params.permit(:title, :body)
     end
 
 end
