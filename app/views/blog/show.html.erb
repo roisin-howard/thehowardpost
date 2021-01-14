@@ -1,16 +1,22 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-4 registration-box text-left">
+        <div class="col-lg-8 registration-box text-left">
             <div class="jumbotron">
                 <h1 class="display-4"><%= @blog.title %></h1>
-                <p class="lead"><%= @blog.body %></p>
+                <p class="lead">
+                    <strong>Posted By:</strong> <%= @user_name%> (id:<%=@blog.users_id%>)
+                    <br/>
+                    <strong>Created On:</strong> <%=@blog.created_at%>
+                    <br/>
+                    <strong>Modified On:</strong> <%=@blog.updated_at%>
+                    <br/>
+                    <strong>Body:</strong> <%= @blog.body %>
+                    </p>
                 <hr class="my-4">
                 <p><%= link_to "Edit", edit_blog_path(@blog) %></p>
-                <p class="lead">
-                    
-                    <button type="button" class="btn btn-info btn-block"><%= link_to "Add New Blog Post", new_blog_path %></button>
-                </p>
             </div>
+            <button type="button" class="btn btn-info btn-block"><%= link_to "View Index of Blog Posts", blog_index_path %></button>
+            <button type="button" class="btn btn-info btn-block"><%= link_to "Add New Blog Post", new_blog_path %></button>
         </div>
     </div>
 </div>

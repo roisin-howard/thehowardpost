@@ -1,10 +1,16 @@
 class BlogController < ApplicationController
   def index
     @blogs = Blog.all.order("created_at DESC");
+    @blogs.each do |blog| 
+      @user = User.find_by_id(blog.users_id)
+      @user_name = @user.first_name + " " +  @user.last_name
+    end
   end
 
   def show
     @blog = Blog.find_by_id(params[:id])
+    @user = User.find_by_id(@blog.users_id)
+    @user_name = @user.first_name + " " +  @user.last_name
   end
 
   def new
@@ -21,7 +27,7 @@ class BlogController < ApplicationController
       puts @blog
       @blog.users_id = current_user.id
       if @blog.save
-          redirect_to @blogs
+          redirect_to blog_path(@blogs)
       else 
       render json: {  
           status: 500,
