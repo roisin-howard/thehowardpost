@@ -7,10 +7,6 @@ class BlogController < ApplicationController
     else
       @blogs = Blog.all.order('created_at ASC')
     end
-    @blogs.each do |blog| 
-      @user = User.find_by_id(blog.users_id)
-      @user_name = @user.first_name + " " +  @user.last_name
-    end
   end
 
   def show
@@ -49,16 +45,26 @@ class BlogController < ApplicationController
 
   def update
     @blog = Blog.find(params[:id])
-    if @blog.update(blog_params)
-      redirect_to @blog
+    if @blog.update(blog_params_update)
+      redirect_to blog_index_path
     else
       render :edit
     end
   end
 
+  def destroy
+    @blog = Blog.find(params[:id])
+    @blog.destroy
+    redirect_to blog_index_path
+  end
+
   private
     def blog_params
       params.permit(:title, :body)
+    end
+
+    def blog_params_update
+      params.require(:blog).permit(:title, :body)
     end
 
 end

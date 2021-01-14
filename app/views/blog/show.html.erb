@@ -4,17 +4,24 @@
             <div class="jumbotron">
                 <h1 class="display-4"><%= @blog.title %></h1>
                 <p class="lead">
+                    <%= @blog.body %>
+                </p>
+                <br/> <br/>
+                <p class="lead float-right">
                     <strong>Posted By:</strong> <%= @user_name%> (id:<%=@blog.users_id%>)
-                    <br/>
-                    <strong>Created On:</strong> <%=@blog.created_at%>
-                    <br/>
+                </p>
+                <br/> <br/>
+                <p class="lead float-right">
+                    <strong>Created On:</strong> <%=@blog.created_at%> |
                     <strong>Modified On:</strong> <%=@blog.updated_at%>
-                    <br/>
-                    <strong>Body:</strong> <%= @blog.body %>
-                    </p>
-                <hr class="my-4">
+                </p>
+                <br/> <br/>
+                <hr/>
                 <% if user_signed_in? %>
-                    <p class="float-right"><%= link_to "Edit", edit_blog_path(@blog) %></p>
+                    <p class="float-right"><%= link_to "Edit", edit_blog_path(@blog) %>
+                    | <%= link_to "Delete", blog_path(@blog),
+                        method: :delete,
+                        data: { confirm: "Are you sure?" } %></p>
                 <% else %>
                     <p class="float-right">Please <%= link_to "Login", new_user_session_path %> or 
                     <%= link_to "Register", new_user_registration_path %> to modify or delete a blog post.</p>

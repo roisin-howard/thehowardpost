@@ -31,28 +31,71 @@
                 <h2>Blog Posts</h2>
                 <hr/>
             </div>
-            <div class="card text-card">
-                <div class="card-body">
-                    <h5 class="card-title">Available Posts</h5>
-                    <p class="card-text">These are the list of current blog posts.  
-                    The blog posts index & other pages are not currenlty set up 
-                    so the buttons will not point anywhere and these posts do not exist.</p>
+            <% if @blogs.count() > 0 %>
+                <div class="card text-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Available Posts</h5>
+                        <p class="card-text">These are the list of current blog posts available, click on the title to see the contents.</p>
+                    </div>
+                    <% @blogs.each.with_index do |blog, i| %>
+                        <div id="accordion">
+                            <div class="card">
+                                <div class="card-header heading<%=i%>">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse<%=i%>" aria-expanded="true" aria-controls="collapseOne">
+                                            <%= blog.title %>
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="collapse<%=i%>" class="collapse" aria-labelledby="heading<%=i%>" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <%= blog.body %>
+                                        <br/>
+                                        <p class="float-right">
+                                            <%= link_to "View", blog_path(blog) %>
+                                            | <%= link_to "Edit", edit_blog_path(blog) %>
+                                            | <%= link_to "Delete", blog_path(blog),
+                                                method: :delete,
+                                                data: { confirm: "Are you sure?" } 
+                                            %>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+            <% else %>
+                <div class="card text-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Available Posts</h5>
+                        <p class="card-text">These are the list of current blog posts.  
+                        The blog posts index & other pages are not currenlty set up 
+                        so the buttons will not point anywhere and these posts do not exist.</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Fake Post 1</li>
+                        <li class="list-group-item">Fake Post 2</li>
+                        <li class="list-group-item">Fake Post 3</li>
+                    </ul>
+            <% end %>
+                    <div class="card-body">
+                        <button type="button" class="btn btn-info btn-block"><%= link_to "View Index of Blog Posts", blog_index_path %></button>
+                        <button type="button" class="btn btn-info btn-block"><%= link_to "Add New Blog Post", new_blog_path %></button>
+                    </div>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Fake Post 1</li>
-                    <li class="list-group-item">Fake Post 2</li>
-                    <li class="list-group-item">Fake Post 3</li>
-                </ul>
-                <div class="card-body">
-                    <button type="button" class="btn btn-info btn-block"><%= link_to "View Index of Blog Posts", blog_index_path %></button>
-                    <button type="button" class="btn btn-info btn-block"><%= link_to "Add New Blog Post", new_blog_path %></button>
-                </div>
-            </div>
-        </div>
         <% else %>
             <div class="col-lg-4 registration-box">
                 <h4>Please <%= link_to "login", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %> to access user profile</h4>
             </div>
+            <div class="col-sm-1">
+            </div>
+
+            <div class="col-lg-4 registration-box">
+                <div>
+                    <h2>Blog Posts</h2>
+                    <hr/>
+                    <button type="button" class="btn btn-info btn-block"><%= link_to "View Index of Blog Posts", blog_index_path %></button>
+                </div>
         <% end %>
     </div>
 </div>

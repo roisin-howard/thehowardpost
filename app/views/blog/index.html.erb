@@ -6,31 +6,37 @@
                 <hr/>
             </div>
             <% if @blogs.count() > 0 %>
-            <% @blogs.each do |blog| %>
-                <div class="jumbotron">
-                    <h1 class="display-12 jumbotron-title"><%= blog.title %></h1>
-                    <p class="lead">
-                    <strong>Posted By:</strong> <%= @user_name%> (id:<%=blog.users_id%>)
+                <% @blogs.each do |blog| %>
+                    <div class="jumbotron">
+                        <h1 class="display-12 jumbotron-title"><%= blog.title %></h1>
+                        <p class="lead">
+                            <%= blog.body %>
+                        </p>
+                        <br/> <br/>
+                        <p class="lead float-right">
+                            <strong>Created On:</strong> <%=blog.created_at%> |
+                            <strong>Modified On:</strong> <%=blog.updated_at%>
+                        </p>
+                        <br/>
+                        <hr/>
+                        <p class="float-right"><%= link_to "View", blog_path(blog) %>
+                        <% if user_signed_in? %>
+                        | <%= link_to "Edit", edit_blog_path(blog) %>
+                        | <%= link_to "Delete", blog_path(blog),
+                            method: :delete,
+                            data: { confirm: "Are you sure?" } %></p>
+                        <% else %>
+                            </p><p>Please <%= link_to "Login", new_user_session_path %> or 
+                            <%= link_to "Register", new_user_registration_path %> to modify or delete a blog post.</p>
+                        <% end %>
+                    </div>
                     <br/>
-                    <strong>Created On:</strong> <%=blog.created_at%>
-                    <br/>
-                    <strong>Modified On:</strong> <%=blog.updated_at%>
-                    <br/>
-                    <strong>Body:</strong> <%= blog.body %>
-                    </p>
-                    <hr class="my-4">
-                    <p><%= link_to "Show", blog_path(blog) %></p>
-                    <% if user_signed_in? %>
-                    <p><%= link_to "Edit", edit_blog_path(blog) %></p>
-                    <% else %>
-                        <p>Please <%= link_to "Login", new_user_session_path %> or 
-                        <%= link_to "Register", new_user_registration_path %> to modify or delete a blog post.</p>
-                    <% end %>
-                </div>
-                <br/>
-            <% end %>
+                <% end %>
             <hr/>
-            <button type="button" class="btn btn-info btn-block"><%= link_to "Add New Blog Post", new_blog_path %></button>
+            <% end %>
+            <% if user_signed_in? %>
+                <button type="button" class="btn btn-info btn-block"><%= link_to "Add New Blog Post", new_blog_path %></button>
+            
             <% else %>
                 <% if !params[:search].nil? %>
                     <p>There are no posts containing the term(s) <%= params[:search] %>.</p>
