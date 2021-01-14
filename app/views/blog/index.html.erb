@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-10 registration-box">
+            <div>
+                <h2>Blog Posts</h2>
+                <hr/>
+            </div>
+            <% if @blogs.count() > 0%>
+            <% @blogs.each do |blog| %>
+                <ul>
+                    <li>
+                    <%= blog.title %>
+                    </li>
+                </ul>
+
+                <div class="card text-card">
+                    <div class="card-header">
+                        <%= blog.title %>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <strong>Posted By:</strong> <%= blog.users_id%> 
+                        <br/>
+                        <strong>Created On:</strong> 
+                        <br/>
+                        <strong>Body:</strong> <%= blog.body %>
+                        </p>
+                    
+                    </div>
+                </div>
+            <% end %>
+            <% else %>
+            <p>There are no articles yet, please create a blog post...</p>
+            <%end%>
+        </div>
+    </div>
+</div>
+ 
+
