@@ -11,7 +11,7 @@
                     <% if user_signed_in? %>
                         <h6 class="dropdown-header">Profile</h6>
                         <li class="dropdown-item">
-                            <%= link_to "View", users_show_path %>
+                            <%= link_to "View", user_path(current_user) %>
                         </li>
                         <li class="dropdown-item">
                             <%= link_to "Edit", edit_user_registration_path %>
@@ -34,7 +34,7 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blogs</a>
                 <ul class="dropdown-menu">
                     <li class="dropdown-item">
-                        <%= link_to "Index", blog_index_path %>
+                        <%= link_to "Index", blogs_path %>
                     </li>
                     <% if user_signed_in? %>
                         <li class="dropdown-item">
@@ -43,7 +43,7 @@
                     <% end %>
                     </ul>
             </li>
-            <%= form_tag(blog_index_path, :method => "get", id: "search-form", :class=>"form-inline navbar-form navbar-right") do %>
+            <%= form_tag(blogs_path, :method => "get", id: "search-form", :class=>"form-inline navbar-form navbar-right") do %>
                 <%= text_field_tag :search, params[:search], placeholder: "Search...", :class=>"form-control" %>
                 <span class="btn btn-default">
                     <i class="fas fa-search"></i> 

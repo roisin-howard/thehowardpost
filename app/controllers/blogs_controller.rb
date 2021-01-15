@@ -1,8 +1,9 @@
-class BlogController < ApplicationController
+class BlogsController < ApplicationController
+
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy] #user cannot access post creation page without being authenticated
+
   def index
-    @search_flag = false
     if params[:search]
-      @search_flag = true
       @blogs = Blog.search(params[:search]).order("created_at DESC")
     else
       @blogs = Blog.all.order('created_at DESC')
@@ -16,20 +17,22 @@ class BlogController < ApplicationController
   end
 
   def new
+    puts "In new"
     @blog = Blog.new
   end
 
   def create
     if user_signed_in?
       @blog = Blog.new(blog_params)
-      @blog.users_id = current_user.id
+      @blog.user = current_user
       if @blog.save
+          puts "Saving"
           redirect_to @blog, notice: "Blog created!"
-      else 
-        redirect_to blog_index_path, alert: "Blog not created, could not be saved!"
+      else
+        render 'new'
       end
     else
-      redirect_to blog_index_path, alert: "Blog not created, user not logged in!"
+      redirect_to blogs_path, alert: "Blog not created, user not logged in!"
     end
   end
 
@@ -40,25 +43,25 @@ class BlogController < ApplicationController
   def update
     @blog = Blog.find(params[:id])
     if @blog.update(blog_params_update)
-      redirect_to blog_index_path, notice: "Blog updated!"
+      redirect_to blogs_path, notice: "Blog updated!"
     else
-      redirect_to blog_index_path, alert: "Blog could not be updated!"
+      render 'edit'
     end
   end
 
   def destroy
     @blog = Blog.find(params[:id])
     @blog.destroy
-    redirect_to blog_index_path, notice: "Blog deleted!"
+    redirect_to blogs_path, notice: "Blog deleted!"
   end
 
   private
     def blog_params
-      params.permit(:title, :body)
+      params.require(:blog).permit(:title, :body, :users_id)
     end
 
     def blog_params_update
-      params.require(:blog).permit(:title, :body)
+      params.require(:blog).permit(:title, :body, :user_id)
     end
 
 end

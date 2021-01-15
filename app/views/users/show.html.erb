@@ -8,7 +8,7 @@
             </div>
             <div class="card text-card">
                 <div class="card-header">
-                    <%= current_user.first_name %> <%= current_user.last_name %>
+                    <%= current_user.full_name %>
                 </div>
                 <div class="card-body">
                     <p class="card-text">
@@ -43,7 +43,7 @@
                                 <div class="card-header heading<%=i%>">
                                     <h5 class="mb-0">
                                         <button class="btn btn-link" data-toggle="collapse" data-target="#collapse<%=i%>" aria-expanded="true" aria-controls="collapseOne">
-                                            <%= blog.title %>
+                                            <%= blog.title %> (Author:<%=blog.user.full_name%>)
                                         </button>
                                     </h5>
                                 </div>
@@ -79,7 +79,7 @@
                     </ul>
             <% end %>
                     <div class="card-body">
-                        <button type="button" class="btn btn-info btn-block"><%= link_to "View Index of Blog Posts", blog_index_path %></button>
+                        <button type="button" class="btn btn-info btn-block"><%= link_to "View Index of Blog Posts", blogs_path %></button>
                         <button type="button" class="btn btn-info btn-block"><%= link_to "Add New Blog Post", new_blog_path %></button>
                     </div>
                 </div>

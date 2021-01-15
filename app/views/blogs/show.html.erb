@@ -12,10 +12,16 @@
                 </p>
                 <br/> <br/>
                 <p class="lead float-right">
-                    <strong>Created On:</strong> <%=@blog.created_at%> |
-                    <strong>Modified On:</strong> <%=@blog.updated_at%>
+                    <strong>Created On:</strong> <%=@blog.created_at.to_date%> |
+                    <strong>Modified On:</strong> <%=@blog.updated_at.to_date%>
                 </p>
-                <br/> <br/>
+                <br/>
+                <h2>Comments</h2>
+                <%= render @blog.comments %>
+                <br/> 
+                <h2>Add a comment:</h2>
+                <%= render 'comments/form' %>
+                <br/>
                 <hr/>
                 <% if user_signed_in? %>
                     <p class="float-right"><%= link_to "Edit", edit_blog_path(@blog) %>
@@ -27,7 +33,7 @@
                     <%= link_to "Register", new_user_registration_path %> to modify or delete a blog post.</p>
                 <% end %>
             </div>
-            <button type="button" class="btn btn-info btn-block"><%= link_to "View Index of Blog Posts", blog_index_path %></button>
+            <button type="button" class="btn btn-info btn-block"><%= link_to "View Index of Blog Posts", blogs_path %></button>
             <% if user_signed_in? %>
                 <button type="button" class="btn btn-info btn-block"><%= link_to "Add New Blog Post", new_blog_path %></button>
             <% else %>

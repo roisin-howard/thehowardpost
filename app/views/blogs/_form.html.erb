@@ -12,6 +12,15 @@
   </div>
 
   <div>
+    <%= form.hidden_field :users_id, value: current_user.id %>
+  </div>
+
+  <% if blog.errors.any? %>
+    <%= blog.errors.full_messages.each do |m| %>
+    <%end%>
+  <%end%>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
