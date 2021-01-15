@@ -6,12 +6,10 @@
                 <hr/>
                 <h4>Your username is <%= current_user.email %></h4>
                 <h4>Full name: <%= current_user.first_name %> <%= current_user.last_name %></h4>
-                <button type="button" class="btn btn-info btn-block"><%= link_to "View Blogs", blog_index_path %></button>
             <% else %>
                 <h2>Welcome!</h2>
                 <hr/>
                 <h4>Please <%= link_to "login", new_user_session_path %> or <%= link_to "sign up", new_user_registration_path %></h4>
-                <button type="button" class="btn btn-info btn-block"><%= link_to "View Blogs", blog_index_path %></button>
             <% end %>
         </div>
         <div class="col-lg-2">

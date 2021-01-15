@@ -5,10 +5,10 @@
         </div>
         <ul class="nav">
             <li class="nav-item nav-link active"><%= link_to 'Home', root_path %></li>
-            <% if user_signed_in? %>
-                <li class="nav-item nav-link dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span><i class="far fa-user-circle"></i></span></a>
-                    <ul class="dropdown-menu">
+            <li class="nav-item nav-link dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span><i class="far fa-user-circle"></i></span></a>
+                <ul class="dropdown-menu">
+                    <% if user_signed_in? %>
                         <h6 class="dropdown-header">Profile</h6>
                         <li class="dropdown-item">
                             <%= link_to "View", users_show_path %>
@@ -20,18 +20,35 @@
                         <li class="dropdown-item">
                             <%= link_to "Logout", destroy_user_session_path, method: :delete %>
                         </li>
-                        </ul>
-                </li>
-                <%= form_tag(blog_index_path, :method => "get", id: "search-form", :class=>"form-inline navbar-form navbar-right") do %>
-                    <%= text_field_tag :search, params[:search], placeholder: "Search...", :class=>"form-control" %>
-                    <span class="btn btn-default">
-                        <i class="fas fa-search"></i> 
-                        <%= submit_tag "Search" %>
-                    </span>
-                <% end %>
-            <% else %>
-                <li class="nav-item nav-link"><%= link_to "Login", new_user_session_path %></li>
-                <li class="nav-item nav-link"><%= link_to "Register", new_user_registration_path %></li>
+                    <% else %>
+                        <li class="dropdown-item">
+                            <%= link_to "Login", new_user_session_path %>
+                        </li>
+                        <li class="dropdown-item">
+                            <%= link_to "Register", new_user_registration_path %>
+                        </li>
+                    <% end %>
+                    </ul>
+            </li>
+            <li class="nav-item nav-link dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blogs</a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-item">
+                        <%= link_to "Index", blog_index_path %>
+                    </li>
+                    <% if user_signed_in? %>
+                        <li class="dropdown-item">
+                            <%= link_to "Add", new_blog_path %>
+                        </li>
+                    <% end %>
+                    </ul>
+            </li>
+            <%= form_tag(blog_index_path, :method => "get", id: "search-form", :class=>"form-inline navbar-form navbar-right") do %>
+                <%= text_field_tag :search, params[:search], placeholder: "Search...", :class=>"form-control" %>
+                <span class="btn btn-default">
+                    <i class="fas fa-search"></i> 
+                    <%= submit_tag "Search" %>
+                </span>
             <% end %>
             <li class="nav-item nav-link">
                 <span><i class="far fa-arrow-alt-circle-left"></i></span><%= link_to " Back" , :back, {:class => "link"}  %>

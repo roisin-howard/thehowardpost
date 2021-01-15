@@ -24,18 +24,12 @@ class BlogController < ApplicationController
       @blog = Blog.new(blog_params)
       @blog.users_id = current_user.id
       if @blog.save
-          redirect_to @blog
+          redirect_to @blog, notice: "Blog created!"
       else 
-      render json: {  
-          status: 500,
-          errors: ['blog not created']
-      }
+        redirect_to blog_index_path, alert: "Blog not created, could not be saved!"
       end
     else
-      render json: {
-          status: 500,
-          errors: ['user not logged in']
-      }
+      redirect_to blog_index_path, alert: "Blog not created, user not logged in!"
     end
   end
 
@@ -46,16 +40,16 @@ class BlogController < ApplicationController
   def update
     @blog = Blog.find(params[:id])
     if @blog.update(blog_params_update)
-      redirect_to blog_index_path
+      redirect_to blog_index_path, notice: "Blog updated!"
     else
-      render :edit
+      redirect_to blog_index_path, alert: "Blog could not be updated!"
     end
   end
 
   def destroy
     @blog = Blog.find(params[:id])
     @blog.destroy
-    redirect_to blog_index_path
+    redirect_to blog_index_path, notice: "Blog deleted!"
   end
 
   private
