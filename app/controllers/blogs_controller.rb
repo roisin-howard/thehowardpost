@@ -35,6 +35,9 @@ class BlogsController < ApplicationController
 
   def edit
     @blog = Blog.find(params[:id])
+    unless current_user == @blog.user
+      redirect_to @blog, alert: "You are not authorised to edit this blog!"
+    end
   end
 
   def update
@@ -49,19 +52,29 @@ class BlogsController < ApplicationController
 
   def destroy
     @blog = Blog.find(params[:id])
-    if @blog.deleted_at == nil    
-      @blog.soft_delete
-      redirect_to blog_path(@blog), alert: "Your blog was deleted!"
-    elsif @blog.deleted_at != nil
-      if(params[:del] == "Destroy")
-        @blog.destroy
-        redirect_to blogs_path, alert: "Your blog was permenantly deleted!"
-      else
-        @blog.undo_delete
-        redirect_to blog_path(@blog), notice: "Your blog was restored!"
+
+    if current_user == @blog.user
+  
+      if @blog.deleted_at == nil    
+        @blog.soft_delete
+        redirect_to blog_path(@blog), alert: "Your blog was deleted!"
+
+      elsif @blog.deleted_at != nil
+
+        if(params[:del] == "Destroy")
+          @blog.destroy
+          redirect_to blogs_path, alert: "Your blog was permenantly deleted!"
+        else
+          @blog.undo_delete
+          redirect_to blog_path(@blog), notice: "Your blog was restored!"
+        end
+      
       end
-    
+  
+    else
+      redirect_to @blog, alert: "You are not authorised to delete this post!"
     end
+
   end
 
   private

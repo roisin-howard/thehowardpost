@@ -17,10 +17,12 @@
                     </p>
                     <br/><br/>
                 <% end %>
+                <% if user_signed_in? %>
                 <p class="lead float-right">
-                        <button type="button" class="btn btn-info float-right" data-toggle="collapse" href="#multiCollapseAddComment" role="button" aria-expanded="false" aria-controls="multiCollapseAddComment">Add Comment</button>
+                    <button type="button" class="btn btn-info float-right" data-toggle="collapse" href="#multiCollapseAddComment" role="button" aria-expanded="false" aria-controls="multiCollapseAddComment">Add Comment</button>
                 </p>
                 <br/><br/>
+                <% end %>
 
                 <p class="lead float-right">
                     <strong>Author:</strong> <%=@blog.user.full_name%>
@@ -42,6 +44,7 @@
                         </div>
                     </div>
                     <br/><br/>
+                    <% if user_signed_in? %>
                     <div class="row">
                         <div class="col">
                             <div class="collapse multi-collapse login-box" id="multiCollapseAddComment">
@@ -51,6 +54,7 @@
                             </div>
                         </div>
                     </div>
+                    <% end %>
                 </p>
                 <hr/>
 
