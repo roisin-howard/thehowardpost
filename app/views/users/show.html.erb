@@ -64,10 +64,12 @@
                                         <p class="lead float-right">
                                             <%= link_to "View", blog_path(blog) %>
                                             | <%= link_to "Edit", edit_blog_path(blog) %>
-                                            | <%= link_to "Delete", blog_path(blog),
-                                                method: :delete,
-                                                data: { confirm: "Are you sure?" } 
-                                            %>
+                                            <% if blog.deleted_at == nil %>
+                                                 | <%= link_to "Delete", blog_path(blog), method: :delete %>
+                                            <% elsif blog != nil %>
+                                                 | <%= link_to "Delete Permenantly", blog_path(blog, del: "Destroy"), method: :delete, notice: "Your blog was successfully deleted." %> | 
+                                                <%= link_to "Undo Delete", blog_path(blog), method: :delete %>
+                                            <% end %>   
                                         </p>
                                     </div>
                                 </div>

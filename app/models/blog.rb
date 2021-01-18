@@ -13,7 +13,6 @@ class Blog < ApplicationRecord
   end
 
   def soft_delete
-    puts "In soft delete method"
     puts deleted_at
     update(deleted_at: DateTime.current)  # soft delete the blog
   end

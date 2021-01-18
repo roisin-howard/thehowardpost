@@ -39,7 +39,7 @@ class BlogsController < ApplicationController
 
   def update
     @blog = Blog.find(params[:id])
-    if @blog.update(blog_params_update)
+    if @blog.update(blog_params)
       redirect_to blogs_path, notice: "Blog updated!"
     else
       flash.now[:notice] = "Blog not updated, could not save to database!"
@@ -49,26 +49,24 @@ class BlogsController < ApplicationController
 
   def destroy
     @blog = Blog.find(params[:id])
-
     if @blog.deleted_at == nil    
       @blog.soft_delete
-      flash.now[:notice] = "Your blog was deleted."
-      render 'show'
-
-      elsif @blog.deleted_at != nil
-          @blog.undo_delete
-          flash.now[:notice] = "Your blog was restored"
-          render 'show'
+      redirect_to blog_path(@blog), alert: "Your blog was deleted!"
+    elsif @blog.deleted_at != nil
+      if(params[:del] == "Destroy")
+        @blog.destroy
+        redirect_to blogs_path, alert: "Your blog was permenantly deleted!"
+      else
+        @blog.undo_delete
+        redirect_to blog_path(@blog), notice: "Your blog was restored!"
       end
+    
+    end
   end
 
   private
     def blog_params
       params.require(:blog).permit(:title, :body, :users_id)
-    end
-
-    def blog_params_update
-      params.require(:blog).permit(:title, :body, :user_id)
     end
 
 end
