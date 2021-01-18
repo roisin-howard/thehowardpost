@@ -15,9 +15,12 @@
                         </p>
                         <br/> 
                         <p class="lead float-right">
-                            <strong>Author:</strong><%=blog.user.full_name%> |
-                            <strong>Created On:</strong> <%=blog.created_at%> |
-                            <strong>Modified On:</strong> <%=blog.updated_at%>
+                            <strong>Author:</strong> <%=blog.user.full_name%> |
+                            <strong>Created On:</strong> <%=blog.created_at.to_date%> |
+                            <strong>Modified On:</strong> <%=blog.updated_at.to_date%>
+                            <%if blog.comments.count > 0 %>
+                                | <strong>Comments:</strong> <%=blog.comments.count%>
+                            <% end %>
                         </p>
                         <br/>
                         <hr/>

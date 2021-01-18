@@ -12,12 +12,9 @@ class BlogsController < ApplicationController
 
   def show
     @blog = Blog.find_by_id(params[:id])
-    @user = User.find_by_id(@blog.users_id)
-    @user_name = @user.first_name + " " +  @user.last_name
   end
 
   def new
-    puts "In new"
     @blog = Blog.new
   end
 
@@ -26,7 +23,6 @@ class BlogsController < ApplicationController
       @blog = Blog.new(blog_params)
       @blog.user = current_user
       if @blog.save
-          puts "Saving"
           redirect_to @blog, notice: "Blog created!"
       else
         render 'new'

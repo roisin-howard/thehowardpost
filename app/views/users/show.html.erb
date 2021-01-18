@@ -43,7 +43,7 @@
                                 <div class="card-header heading<%=i%>">
                                     <h5 class="mb-0">
                                         <button class="btn btn-link" data-toggle="collapse" data-target="#collapse<%=i%>" aria-expanded="true" aria-controls="collapseOne">
-                                            <%= blog.title %> (Author:<%=blog.user.full_name%>)
+                                            <strong><%= blog.title %></strong> (Author:<%=blog.user.full_name%>)
                                         </button>
                                     </h5>
                                 </div>
@@ -51,7 +51,17 @@
                                     <div class="card-body">
                                         <%= truncate(blog.body, :length => 300) %>
                                         <br/>
-                                        <p class="float-right">
+                                        <p class="lead">
+                                            <strong>Author:</strong> <%=blog.user.full_name%> 
+                                            <br/>
+                                            <strong>Created On:</strong> <%=blog.created_at.to_date%> 
+                                            <br/>
+                                            <strong>Modified On:</strong> <%=blog.updated_at.to_date%>
+                                            <%if blog.comments.count > 0 %>
+                                                <br/><strong>Comments:</strong> <%=blog.comments.count%>
+                                            <% end %>
+                                        </p>
+                                        <p class="lead float-right">
                                             <%= link_to "View", blog_path(blog) %>
                                             | <%= link_to "Edit", edit_blog_path(blog) %>
                                             | <%= link_to "Delete", blog_path(blog),

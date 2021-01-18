@@ -1,7 +1,7 @@
 <%= form_with model: [ @blog, @blog.comments.build ] do |form| %>
     <p>
         <%= form.label :commenter %><br>
-        <%= form.text_field :commenter %>
+        <%= form.text_field :commenter, value: current_user.full_name %>
     </p>
     <p>
         <%= form.label :body %><br>
@@ -11,9 +11,9 @@
         <%= form.hidden_field :blog_id, value: @blog.id %>
     </p>
     <% if @blog.errors.any? %>
-    <%= @blog.errors.full_messages.each do |m| %>
+        <%= @blog.errors.full_messages.each do |m| %>
+        <%end%>
     <%end%>
-  <%end%>
     <p>
         <%= form.submit %>
     </p>
