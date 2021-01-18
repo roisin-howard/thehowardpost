@@ -10,16 +10,11 @@ class User < ApplicationRecord
   validate :password_complexity
 
   has_one :profile, dependent: :destroy
-  after_create :init_profile
 
   has_many :blogs, dependent: :destroy
 
   def full_name
     "#{first_name} #{last_name}"
-  end
-
-  def init_profile
-    self.create_profile!
   end
 
   def password_complexity
