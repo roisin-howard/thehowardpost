@@ -6,7 +6,19 @@ class Blog < ApplicationRecord
   validates :title, presence: true
   validates :body, presence: true
 
+  scope :not_deleted, -> { where(:deleted_at => nil)}   # Scope for the active posts.
+
   def self.search(search)
     where("title || body ILIKE ?", "%#{search}%")
+  end
+
+  def soft_delete
+    puts "In soft delete method"
+    puts deleted_at
+    update(deleted_at: DateTime.current)  # soft delete the blog
+  end
+
+  def undo_delete
+      update(deleted_at: nil)  # undo the soft delete
   end
 end

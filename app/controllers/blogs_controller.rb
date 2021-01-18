@@ -25,6 +25,7 @@ class BlogsController < ApplicationController
       if @blog.save
           redirect_to @blog, notice: "Blog created!"
       else
+        flash.now[:notice] = "Blog not created, could not save to database!"
         render 'new'
       end
     else
@@ -41,14 +42,24 @@ class BlogsController < ApplicationController
     if @blog.update(blog_params_update)
       redirect_to blogs_path, notice: "Blog updated!"
     else
+      flash.now[:notice] = "Blog not updated, could not save to database!"
       render 'edit'
     end
   end
 
   def destroy
     @blog = Blog.find(params[:id])
-    @blog.destroy
-    redirect_to blogs_path, notice: "Blog deleted!"
+
+    if @blog.deleted_at == nil    
+      @blog.soft_delete
+      flash.now[:notice] = "Your blog was deleted."
+      render 'show'
+
+      elsif @blog.deleted_at != nil
+          @blog.undo_delete
+          flash.now[:notice] = "Your blog was restored"
+          render 'show'
+      end
   end
 
   private

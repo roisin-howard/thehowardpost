@@ -26,10 +26,13 @@
                         <hr/>
                         <p class="float-right"><%= link_to "View", blog_path(blog) %>
                         <% if user_signed_in? %>
-                        | <%= link_to "Edit", edit_blog_path(blog) %>
-                        | <%= link_to "Delete", blog_path(blog),
-                            method: :delete,
-                            data: { confirm: "Are you sure?" } %></p>
+                             | <%= link_to "Edit", edit_blog_path(blog) %>
+                            <% if blog.deleted_at == nil %>
+                                 | <%= link_to "Delete", blog_path(blog), method: :delete %>
+                            <% elsif blog != nil %>
+                                 | <%= link_to "Delete Permenantly", blogs_path(blog), method: :destroy, notice: "Your blog was successfully deleted." %> | 
+                                <%= link_to "Undo Delete", blog_path(blog), method: :delete %>
+                            <% end %>    
                         <% else %>
                             </p><p>Please <%= link_to "Login", new_user_session_path %> or 
                             <%= link_to "Register", new_user_registration_path %> to modify or delete a blog post.</p>
