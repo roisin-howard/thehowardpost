@@ -36,6 +36,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Available Posts</h5>
                         <p class="card-text">These are the list of current blog posts available, click on the title to see the contents.</p>
+                        <p>There are <%= Blog.public_count %> blog posts and counting!</p>
                     </div>
                     <% @blogs.each.with_index do |blog, i| %>
                         <div id="accordion">
@@ -106,7 +107,7 @@
                 <div>
                     <h2>Blog Posts</h2>
                     <hr/>
-                    <button type="button" class="btn btn-info btn-block"><%= link_to "View Index of Blog Posts", blog_index_path %></button>
+                    <button type="button" class="btn btn-info btn-block"><%= link_to "View Index of Blog Posts", blogs_path %></button>
                 </div>
         <% end %>
     </div>
