@@ -17,7 +17,7 @@ module Visible
         end
 
         def archive_count
-            where(status: 'archive').count
+            where(status: 'archived').count
         end
     end
 

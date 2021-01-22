@@ -15,11 +15,15 @@ class Blog < ApplicationRecord
   end
 
   def soft_delete
-    puts deleted_at
     update(deleted_at: DateTime.current)  # soft delete the blog
   end
 
   def undo_delete
-      update(deleted_at: nil)  # undo the soft delete
+    update(deleted_at: nil)  # undo the soft delete
+  end
+
+  def archive
+    puts "in archive at blog model"
+    update(status: 'archived')
   end
 end

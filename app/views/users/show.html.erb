@@ -70,7 +70,10 @@
                                             <% elsif blog != nil %>
                                                  | <%= link_to "Delete Permenantly", blog_path(blog, del: "Destroy"), method: :delete, notice: "Your blog was successfully deleted." %> | 
                                                 <%= link_to "Undo Delete", blog_path(blog), method: :delete %>
-                                            <% end %>   
+                                            <% end %>  
+                                            <% if !blog.archived? %>
+                                                 | <%= link_to "Archive", blogs_path, method: :archive %>
+                                            <% end %> 
                                         </p>
                                     </div>
                                 </div>

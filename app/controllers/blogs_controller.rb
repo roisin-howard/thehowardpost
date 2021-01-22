@@ -7,6 +7,7 @@ class BlogsController < ApplicationController
       @blogs = Blog.search(params[:search]).order("created_at DESC")
     else
       @blogs = Blog.all.order('created_at DESC')
+      @blogs_by_month = Blog.all.group_by { |blog| blog.created_at.strftime("%B") }
     end
   end
 
@@ -72,9 +73,27 @@ class BlogsController < ApplicationController
       end
   
     else
-      redirect_to @blog, alert: "You are not authorised to delete this post!"
+      redirect_to @blog, alert: "You are not authorised to delete this blog!"
     end
 
+  end
+
+  def archive
+    puts "in archive at blog controller"
+    @blog = Blog.find(params[:id])
+    puts @blog
+    if current_user == @blog.user
+      puts current_user
+      if !@blog.archived?
+        puts "blog isnt already archived"
+        @blog.archive
+        redirect_to blogs_path, notice: "Your blog has been archived!"
+      else
+        redirect_to blog_path(@blog), notice: "Your blog is already archived!"
+      end
+    else
+      redirect_to blog_path(@blog), alert: "You are not authorised to archive this blog!"
+    end
   end
 
   private

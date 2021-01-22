@@ -18,10 +18,12 @@
                     <br/><br/>
                 <% end %>
                 <% if user_signed_in? %>
-                <p class="lead float-right">
-                    <button type="button" class="btn btn-info float-right" data-toggle="collapse" href="#multiCollapseAddComment" role="button" aria-expanded="false" aria-controls="multiCollapseAddComment">Add Comment</button>
-                </p>
-                <br/><br/>
+                    <% if !@blog.archived? %>
+                        <p class="lead float-right">
+                            <button type="button" class="btn btn-info float-right" data-toggle="collapse" href="#multiCollapseAddComment" role="button" aria-expanded="false" aria-controls="multiCollapseAddComment">Add Comment</button>
+                        </p>
+                        <br/><br/>
+                    <% end %>
                 <% end %>
 
                 <p class="lead float-right">
@@ -45,15 +47,17 @@
                     </div>
                     <br/><br/>
                     <% if user_signed_in? %>
-                    <div class="row">
-                        <div class="col">
-                            <div class="collapse multi-collapse login-box" id="multiCollapseAddComment">
-                                <div class="card card-body">
-                                    <%= render 'comments/form' %>
+                        <% if !@blog.archived? %>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="collapse multi-collapse login-box" id="multiCollapseAddComment">
+                                        <div class="card card-body">
+                                            <%= render 'comments/form' %>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        <% end %>
                     <% end %>
                 </p>
                 <hr/>
@@ -65,7 +69,10 @@
                     <% elsif @blog != nil %>
                          | <%= link_to "Delete Permenantly", blog_path(@blog, del: "Destroy"), method: :delete, notice: "Your blog was successfully deleted." %> | 
                             <%= link_to "Undo Delete", blog_path(@blog), method: :delete %>
-                    <% end %>    
+                    <% end %>   
+                    <% if !@blog.archived? %>
+                         | <%= link_to "Archive", blog_path(@blog), method: :archive %>
+                     <% end %>
                 <% else %>
                     <p class="float-right">Please <%= link_to "Login", new_user_session_path %> or 
                     <%= link_to "Register", new_user_registration_path %> to modify or delete a blog post.</p>
