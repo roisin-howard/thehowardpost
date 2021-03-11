@@ -7,6 +7,7 @@ class BlogsController < ApplicationController
       @blogs = Blog.search(params[:search]).order("created_at DESC")
     else
       @blogs = Blog.all.order('created_at DESC')
+      @blogs_asc = Blog.all.order('created_at ASC')
       @blogs_by_month = Blog.all.group_by { |blog| blog.created_at.strftime("%B") }
     end
   end
@@ -52,30 +53,32 @@ class BlogsController < ApplicationController
   end
 
   def destroy
-    @blog = Blog.find(params[:id])
-
-    if current_user == @blog.user
-  
-      if @blog.deleted_at == nil    
-        @blog.soft_delete
-        redirect_to blog_path(@blog), alert: "Your blog was deleted!"
-
-      elsif @blog.deleted_at != nil
-
-        if(params[:del] == "Destroy")
-          @blog.destroy
-          redirect_to blogs_path, alert: "Your blog was permenantly deleted!"
-        else
-          @blog.undo_delete
-          redirect_to blog_path(@blog), notice: "Your blog was restored!"
-        end
-      
-      end
-  
+    if(params[:arc] == "Archive")
+      archive
+      @blog = Blog.find(params[:id])
     else
-      redirect_to @blog, alert: "You are not authorised to delete this blog!"
-    end
+      if current_user == @blog.user
+    
+        if @blog.deleted_at == nil    
+          @blog.soft_delete
+          redirect_to blog_path(@blog), alert: "Your blog was deleted!"
 
+        elsif @blog.deleted_at != nil
+
+          if(params[:del] == "Destroy")
+            @blog.destroy
+            redirect_to blogs_path, alert: "Your blog was permenantly deleted!"
+          else
+            @blog.undo_delete
+            redirect_to blog_path(@blog), notice: "Your blog was restored!"
+          end
+        
+        end
+    
+      else
+        redirect_to @blog, alert: "You are not authorised to delete this blog!"
+      end
+    end
   end
 
   def archive
@@ -98,7 +101,8 @@ class BlogsController < ApplicationController
 
   private
     def blog_params
-      params.require(:blog).permit(:title, :body, :users_id)
+      puts params
+      params.require(:blog).permit(:title, :body, :users_id, :status)
     end
 
 end

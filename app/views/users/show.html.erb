@@ -72,7 +72,7 @@
                                                 <%= link_to "Undo Delete", blog_path(blog), method: :delete %>
                                             <% end %>  
                                             <% if !blog.archived? %>
-                                                 | <%= link_to "Archive", blogs_path, method: :archive %>
+                                                 | <%= link_to "Archive", blog_path(blog, arc: "Archive"), method: :delete %>
                                             <% end %> 
                                         </p>
                                     </div>

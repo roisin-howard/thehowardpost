@@ -71,7 +71,7 @@
                             <%= link_to "Undo Delete", blog_path(@blog), method: :delete %>
                     <% end %>   
                     <% if !@blog.archived? %>
-                         | <%= link_to "Archive", blog_path(@blog), method: :archive %>
+                         | <%= link_to "Archive", blog_path(@blog, arc: "Archive"), method: :delete %>
                      <% end %>
                 <% else %>
                     <p class="float-right">Please <%= link_to "Login", new_user_session_path %> or 
