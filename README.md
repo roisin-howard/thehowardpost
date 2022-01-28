@@ -1,20 +1,11 @@
-This is a blogging engine which is used as part of the TPOZ onboarding process.
+### Clone the project
+```git clone git@github.com:roisin-howard/thehowardpost.git```
 
-* Ruby version
+### Navigate to the project root directory
+```cd thehowardpost```
 
-* System dependencies
+### Run locally
+```foreman start -f Procfile.dev```
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
+### Open in browser
+```http://localhost:3000/```
